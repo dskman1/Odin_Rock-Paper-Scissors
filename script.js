@@ -31,10 +31,12 @@ function playRound(humanChoice){
 
     console.log(`Computer : ${computerChoice}`);
     
-    humanChoiceText.textContent = `Human Choice : ${isEqual ? "Tie" : humanChoice[0].toUpperCase() + humanChoice.slice(1)}`;
-    computerChoiceText.textContent = `Computer Choice : ${isEqual ? "Tie" : computerChoice[0].toUpperCase() + computerChoice.slice(1)}`;
+    
+    humanChoiceText.textContent = `Human Choice : ${humanChoice[0].toUpperCase() + humanChoice.slice(1)}`;
+    computerChoiceText.textContent = `Computer Choice : ${computerChoice[0].toUpperCase() + computerChoice.slice(1)}`;
 
     if(computerChoice == humanChoice){
+        setWinner.textContent = "It's A Tie";
         console.log("It's A Tie");
     }
     else if(computerChoice == "paper" && humanChoice == "rock" 
@@ -43,10 +45,12 @@ function playRound(humanChoice){
         console.log("Computer Wins!");
         computerScore++;
         computerScoreText.textContent = `Computer Score : ${computerScore}`;
+        setWinner.textContent = "Computer Wins!";
     } else {
         console.log("You Win!")
         humanScore++;
         humanScoreText.textContent = `Human Score : ${humanScore}`;
+        setWinner.textContent = "You Win";
     }
     rounds++;
     roundsPlayed.textContent = `Rounds Played : ${rounds}`;
@@ -69,7 +73,7 @@ function resetGame(){
     computerScoreText.textContent = `Computer Score : ${computerScore}`;
     humanScoreText.textContent =`Human Score : ${humanScore}`;
     roundsPlayed.textContent = `Rounds Played : ${rounds}`;
-    
+   
 }
 
 function announceWinner(){
@@ -98,6 +102,10 @@ function optionalReset(){
     computerScoreText.textContent = `Computer Score : ${computerScore}`;
     roundsPlayed.textContent = `Rounds Played : ${rounds}`;
     finalResult.textContent = "";
+    totalRounds.textContent = "";
+    humanChoiceText.textContent = "";
+    computerChoiceText.textContent = "";
+    setWinner.textContent = "";
 }
 
 const container = document.createElement("div");
@@ -151,6 +159,9 @@ scoreContainer.appendChild(roundsPlayed);
 const choicesContainer = document.createElement("div");
 container.insertBefore(choicesContainer, scoreContainer);
 
+const setWinner = document.createElement("p");
+choicesContainer.appendChild(setWinner);
+
 const humanChoiceText = document.createElement("p")
 choicesContainer.appendChild(humanChoiceText);
 
@@ -170,7 +181,7 @@ container.appendChild(resetBtn);
 resetBtn.addEventListener("click", () =>{
     console.log("Loser")
     optionalReset();
-    span.textContent = "LOSER CAN'T BEAT A MINDLESS COMPUTER"
+    span.textContent = "Game Is Reset"
 
 })
 
